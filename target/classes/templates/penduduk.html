@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lihat Data Penduduk</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
+    </head>
+<body>
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+    	<div class="navbar-header">
+      		<a class="navbar-brand" href="#">SI Kependudukan</a>
+    	</div>
+    	<ul class="nav navbar-nav">
+     		<li class="active"><a href="#">Home</a></li>
+     		<li><a href="#">Cari Data</a></li>
+    	</ul>
+  	</div>
+</nav>
+    
+<div class="container">    
+    	<h1 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}"></h1>
+    	<br></br>
+       	<p th:text="'NIK = ' + ${penduduk.nik}">NIK</p> 
+       	<p th:text="'Nama = ' + ${penduduk.nama}">Nama</p> 
+       	<p th:text="'Tempat/Tanggal Lahir = ' + ${penduduk.tempat_lahir} + ', ' + ${penduduk.tanggal_lahir}">Tempat/Tanggal Lahir</p> 
+       	<p th:text="'Alamat = ' + ${penduduk.alamat}">Alamat</p> 
+       	<p th:text="'RT/RW = ' + ${penduduk.RT} + '/ ' + ${penduduk.RW}">RT/RW</p> 
+       	<p th:text="'Kelurahan/Desa = ' + ${penduduk.nama_kelurahan}">Kelurahan/Desa</p> 
+     	<p th:text="'Kecamatan = ' + ${penduduk.nama_kecamatan}">Kecamatan</p> 
+     	<p th:text="'Kota = ' + ${penduduk.nama_kota}">Kota</p> 
+     	<p th:text="'Golongan Darah = ' + ${penduduk.golongan_darah}">Golongan Darah</p> 
+     	<p th:text="'Agama = ' + ${penduduk.agama}">Agama</p> 
+     	<p th:text="'Status Perkawinan = ' + ${penduduk.status_perkawinan}">Status Perkawinan</p>
+     	<p th:text="'Pekerjaan = ' + ${penduduk.pekerjaan}">Pekerjaan</p> 
+     	<p th:text="'Kewarganegaraan = ' + ${penduduk.is_wni == true ? 'WNI' : 'WNA'}">Kewarganegaraan</p>     	 
+     	<p th:text="'Status Kematian = ' + ${penduduk.is_wafat == true ? 'Mati' : 'Hidup'}">Status Kematian</p> 
+       	<div th:if="${penduduk.is_wafat} == '0' ">
+       		<form action="penduduk/mati" method="post">
+		 	 <input type="hidden" name="nik" th:value="${penduduk.nik}"></input>
+		 	 <button type="submit" class="btn btn-danger">Nonaktifkan</button>
+			</form>	
+		</div>
+</div>       	
+</body>
+<footer>
+  <div th:replace="fragments/fragment :: footer"></div>
+</footer>
+<style>
+p {
+	line-height: 100%;
+}
+</style>
+</html>
